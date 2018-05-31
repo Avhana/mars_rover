@@ -1,20 +1,25 @@
 require './rover'
 
 RSpec.describe Rover do
-  let(:subject) { Rover.new(params) }
+  let(:subject) { Rover.new }
 
   describe '#move' do
     it 'returns 0,0  for the initial position' do
       expect(subject.position).to eq([0, 0])
     end
 
-    skip it 'returns :n for initialheading' do
+    skip it 'returns :n for initial heading' do
       expect(subject.heading).to eq(:n)
     end
 
     skip it 'tracks multiple moves in the same direction' do
       make_moves([[:n, 1], [:n, 1]])
       expect(subject.position).to eq([0, 2])
+    end
+
+    skip it 'tracks the heading after each move' do
+      make_moves([[:n, 1], [:w, 1]])
+      expect(subject.heading).to eq(:w)
     end
 
     skip it 'tracks single moves of > 1 distance' do
@@ -24,12 +29,17 @@ RSpec.describe Rover do
 
     skip it 'tracks moves in different directions' do
       make_moves([[:w, 2], [:n, 1], [:s, 4]])
-      expect(subject.position).to eq([-3, -2])
+      expect(subject.position).to eq([-2, -3])
     end
 
     skip it 'has a range of 10 on a single charge' do
       make_moves([[:n, 11]])
       expect(subject.position).to eq([0, 10])
+    end
+
+    skip it 'has a range of 10 across n moves' do
+      make_moves([[:n, 4], [w: 6], [s: 2]])
+      expect(subject.position).to eq([-6, 4])
     end
   end
 end
@@ -111,8 +121,8 @@ describe 'integration' do
 end
 
 def make_moves(moves)
-  moves.each do |diretion, distance|
-    subject.move(diretion, distance)
+  moves.each do |direction, distance|
+    subject.move(direction, distance)
   end
 end
 

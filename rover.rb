@@ -1,8 +1,8 @@
 class Rover
   attr_reader :position, :heading, :charge, :range, :max_range
 
-  def initialize
-    {}
+  def initialize(params = {})
+    nil
   end
 
   def move(direction, distance)
