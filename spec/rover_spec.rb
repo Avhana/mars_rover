@@ -38,7 +38,7 @@ RSpec.describe Rover do
     end
 
     it 'has a range of 10 across n moves' do
-      make_moves([[:n, 4], [w: 6], [s: 2]])
+      make_moves([[:n, 4], [:w, 6], [:s, 2]])
       expect(subject.position).to eq([-6, 4])
     end
   end
@@ -88,7 +88,7 @@ describe 'range and max_range' do
     expect(subject.range).to eq(5)
   end
 
-  it 'as a range of 2 after charging fr 2 hours' do
+  it 'has a range of 2 after charging fr 2 hours' do
     make_moves([[:n, 10]])
     charge(2)
     expect(subject.range).to eq(2)
